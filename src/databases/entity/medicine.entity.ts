@@ -1,25 +1,30 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Prescuption } from "./prescuption.entity";
-
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Prescuption } from './prescuption.entity';
 
 @Entity()
 export class Medicine {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @Column()
+  volume: number;
 
-    @Column()
-    volume: number;
+  @Column()
+  notes: string;
 
-    @Column()
-    notes: string
-
-    @ManyToMany(() => Prescuption)
-    @JoinTable({
-        name: 'medicine_precuption'
-    })
-    prescuption: Prescuption[];
+  @Column()
+  @ManyToMany(() => Prescuption)
+  @JoinTable({
+    name: 'medicine_precuption',
+  })
+  prescuption: Prescuption[];
 }

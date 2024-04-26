@@ -14,6 +14,7 @@ import { UserModule } from './module/user/user.module';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './common/guards/auth.guard';
 import { AllExceptionsFilter } from './common/exceptions/all.exceptions';
+import { MedicineModule } from './module/medicine/medicine.module';
 
 @Module({
   imports: [
@@ -28,23 +29,30 @@ import { AllExceptionsFilter } from './common/exceptions/all.exceptions';
         username: configService.get('MYSQLDB_USER'),
         password: configService.get('MYSQLDB_PASSWORD'),
         database: configService.get('MYSQLDB_DATABASE'),
-        entities: ["src/databases/entity/*.js"],
+        entities: ['src/databases/entity/*.js'],
         migrationsRun: false,
-        migrations: [
-          "src/migrations/*.ts",
-          "dist/migrations/*{.ts,.js}"
-        ],
+        migrations: ['src/migrations/*.ts', 'dist/migrations/*{.ts,.js}'],
         cli: {
           entitiesDir: __dirname + '/src/databases/entities',
-          migrationsDir: "src/migrations",
+          migrationsDir: 'src/migrations',
         },
         autoLoadEntities: true,
         synchronize: true,
-      })
+      }),
     }),
-    TypeOrmModule.forFeature([User, Group, Prescuption, Health, Booking, Medicine, Schedule, TakeMedicine]),
+    TypeOrmModule.forFeature([
+      User,
+      Group,
+      Prescuption,
+      Health,
+      Booking,
+      Medicine,
+      Schedule,
+      TakeMedicine,
+    ]),
     AuthModule,
-    UserModule
+    UserModule,
+    MedicineModule,
   ],
   controllers: [],
   providers: [
@@ -62,4 +70,4 @@ import { AllExceptionsFilter } from './common/exceptions/all.exceptions';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}
