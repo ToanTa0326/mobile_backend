@@ -22,9 +22,15 @@ export class Medicine {
   notes: string;
 
   @Column()
-  @ManyToMany(() => Prescuption)
-  @JoinTable({
-    name: 'medicine_precuption',
-  })
-  prescuption: Prescuption[];
+  image: string;
+
+  @Column()
+  url: string;
+
+  // @Column()
+  // @ManyToMany(() => Prescuption)
+  // @JoinTable({
+  //   name: 'medicine_precuption',
+  // })
+  // prescuption: Prescuption[];
 }
